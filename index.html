@@ -1,0 +1,26 @@
+<script>
+function generateKey() {
+  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+  function rand(len) {
+    let r = "";
+    for (let i = 0; i < len; i++) {
+      r += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return r;
+  }
+
+  let days = document.getElementById("time").value;
+
+  let expire = Date.now() + (days * 24 * 60 * 60 * 1000);
+
+  // 🔐 encode thời gian (base64)
+  let encoded = btoa(expire.toString());
+
+  let key = "VIP-" + rand(3) + "-" + rand(3) + "-" + encoded;
+
+  document.getElementById("result").innerText = key;
+
+  navigator.clipboard.writeText(key);
+}
+</script>
